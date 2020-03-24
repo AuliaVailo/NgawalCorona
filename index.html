@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Kawal Corona</title>
     <style>
-        $primary-color: color("materialize-red", "lighten-2") !default;
+        
         html {
             background-color: #f5f5f5;
+            scroll-behavior: smooth;
         }
         .card-panel {
             height: 200px;
@@ -43,13 +44,21 @@
         <nav color="cyan lighten-1">
             <div class="nav-wrapper container" >
               <a href="#" class="brand-logo">Kawal Corona</a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#provinsi">Data Per Provinsi</a></li>
-                <li><a href="#global">Data Global</a></li>
+                <li><a href="#indonesia">Data Sak Indonesia</a></li>
+                <li><a href="#">Data Per Provinsi</a></li>
+                <li><a href="#global">Data Sak Ndonyo</a></li>
               </ul>
             </div>
           </nav>
+          <ul class="sidenav" id="mobile-demo">
+            <li><a class="sidenav-close" href="#home">Home</a></li>
+            <li><a class="sidenav-close" href="#indonesia">Data Sak Indonesia</a></li>
+            <li><a class="sidenav-close" href="#">Data Per Provinsi</a></li>
+            <li><a class="sidenav-close" href="#global">Data Sak Ndonyo</a></li>
+          </ul>
           <div class="container">
               <div id="home">
                   <div class="judul" style="padding-bottom: 10px;">
@@ -57,7 +66,7 @@
                     <h6 class="center-align">Ngawasi dewe ben gak diapusi wong</h4>
                   </div>
                   <hr>
-                  <div class="data-global" style="padding-top: 20px;">
+                  <div id="global" class="data-global" style="padding-top: 20px;">
                       <div class="row" style="padding-bottom: 0;">
                         <div>
                             <h4>Sak Ndonyo</h5>
@@ -107,7 +116,7 @@
                         </div>
                       </div>
                   </div>
-                  <div class="data-global" style="padding-top: 20px;">
+                  <div id="indonesia" class="data-global" style="padding-top: 20px;">
                     <div class="row" style="padding-bottom: 0;">
                       <div>
                           <h4>Sak Indonesia</h5>
@@ -353,6 +362,8 @@
             var instances = M.Autocomplete.init(elems, {
                 data: coronaVm.$data.nama_propinsi
             });
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
         });
     </script>
   </body>
