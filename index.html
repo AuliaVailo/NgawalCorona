@@ -82,7 +82,18 @@
                             <div class="card-panel yellow">
                                 <div class="col s6 white-text">
                                     <p class="card-head">Positif</p>
-                                    <h4 class="card-content">{{global.positif.toLocaleString('id')}}</h4>
+                                    <h4 v-if="global.positif" class="card-content">{{global.positif.toLocaleString('id')}}</h4>
+                                    <div v-else class="preloader-wrapper big active">
+                                        <div class="spinner-layer spinner-blue-only">
+                                          <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                          </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                          </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                          </div>
+                                        </div>
+                                    </div>
                                     <p class="card-detail">menungsho</p>
                                 </div>
                                 <div class="col s6">
@@ -94,7 +105,18 @@
                             <div class="card-panel green accent-3">
                                 <div class="col s6 white-text">
                                     <p class="card-head">Mari</p>
-                                    <h4 class="card-content">{{global.sembuh.toLocaleString('id')}}</h4>
+                                    <h4 v-if="global.sembuh" class="card-content">{{global.sembuh.toLocaleString('id')}}</h4>
+                                    <div v-else class="preloader-wrapper big active">
+                                        <div class="spinner-layer spinner-blue-only">
+                                          <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                          </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                          </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                          </div>
+                                        </div>
+                                    </div>
                                     <p class="card-detail">menungsho</p>
                                 </div>
                                 <div class="col s6">
@@ -106,7 +128,18 @@
                             <div class="card-panel red darken-2">
                                 <div class="col s6 white-text">
                                     <p class="card-head">Sedho</p>
-                                    <h4 class="card-content">{{global.meninggal.toLocaleString('id')}}</h4>
+                                    <h4 v-if="global.meninggal" class="card-content">{{global.meninggal.toLocaleString('id')}}</h4>
+                                    <div v-else class="preloader-wrapper big active">
+                                        <div class="spinner-layer spinner-blue-only">
+                                          <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                          </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                          </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                          </div>
+                                        </div>
+                                    </div>
                                     <p class="card-detail">menungsho</p>
                                 </div>
                                 <div class="col s6">
@@ -132,7 +165,18 @@
                           <div class="card-panel yellow">
                               <div class="col s6 white-text">
                                   <p class="card-head">Positif</p>
-                                  <h2 class="card-content">{{indonesia.positif.toLocaleString('id')}}</h2>
+                                  <h2 v-if="indonesia.positif" class="card-content">{{indonesia.positif.toLocaleString('id')}}</h2>
+                                  <div v-else class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                      <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                      </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                      </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                   <p class="card-detail">menungsho</p>
                               </div>
                               <div class="col s6">
@@ -144,7 +188,18 @@
                           <div class="card-panel green accent-3">
                               <div class="col s6 white-text">
                                   <p class="card-head">Mari</p>
-                                  <h2 class="card-content">{{indonesia.sembuh.toLocaleString('id')}}</h2>
+                                  <h2 v-if="indonesia.sembuh" class="card-content">{{indonesia.sembuh.toLocaleString('id')}}</h2>
+                                  <div v-else class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                      <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                      </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                      </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                   <p class="card-detail">menungsho</p>
                               </div>
                               <div class="col s6">
@@ -156,7 +211,18 @@
                           <div class="card-panel red darken-2">
                               <div class="col s6 white-text">
                                   <p class="card-head">Sedho</p>
-                                  <h2 class="card-content">{{indonesia.meninggal.toLocaleString('id')}}</h2>
+                                  <h2 v-if="indonesia.meninggal" class="card-content">{{indonesia.meninggal.toLocaleString('id')}}</h2>
+                                  <div v-else class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                      <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                      </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                      </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                   <p class="card-detail">menungsho</p>
                               </div>
                               <div class="col s6">
@@ -282,6 +348,9 @@
             created () {
                 // golek propinsi
                 this.onload()
+                setInterval(() => {
+                    this.onload()
+                }, 30 * 60 * 1000);
             },
             methods: {
                 onload () {
