@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Kawal Corona</title>
+    <style>
+        $primary-color: color("materialize-red", "lighten-2") !default;
+        html {
+            background-color: #f5f5f5;
+        }
+        .card-panel {
+            height: 200px;
+        }
+
+        .card-head {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .card-detail {
+            margin: 0;
+        }
+
+        .card-content {
+            margin: 0;
+        }
+        /* For mobile */
+        @media only screen and (max-width: 768px) {
+            .card-panel {
+                height: 250px;
+            }
+        }
+    </style>
+  </head>
+
+  <body>
+      <div id="app">
+        <nav color="cyan lighten-1">
+            <div class="nav-wrapper container" >
+              <a href="#" class="brand-logo">Kawal Corona</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#provinsi">Data Per Provinsi</a></li>
+                <li><a href="#global">Data Global</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container">
+              <div id="home">
+                  <div class="judul" style="padding-bottom: 10px;">
+                    <h3 class="center-align">NGAWASI KORONA BARENG-BARENG</h2>
+                    <h6 class="center-align">Ngawasi dewe ben gak diapusi wong</h4>
+                  </div>
+                  <hr>
+                  <div class="data-global" style="padding-top: 20px;">
+                      <div class="row" style="padding-bottom: 0;">
+                        <div>
+                            <h4>Sak Ndonyo</h5>
+                        </div>
+                        <div style="width: 250px;
+                        margin-top: -53px;
+                        padding-left: 200px;" >
+                            <img class="responsive-img" src="https://image.flaticon.com/icons/svg/814/814513.svg" alt="https://www.flaticon.com/free-icon/worldwide_814513?term=earth&page=1&position=7">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s12 m12 l6 xl4">
+                            <div class="card-panel yellow">
+                                <div class="col s6 white-text">
+                                    <p class="card-head">Positif</p>
+                                    <h3 class="card-content">{{global.positif.toLocaleString('id')}}</h3>
+                                    <p class="card-detail">menungsho</p>
+                                </div>
+                                <div class="col s6">
+                                    <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307709.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l6 xl4">
+                            <div class="card-panel green accent-3">
+                                <div class="col s6 white-text">
+                                    <p class="card-head">Mari</p>
+                                    <h3 class="card-content">{{global.sembuh.toLocaleString('id')}}</h3>
+                                    <p class="card-detail">menungsho</p>
+                                </div>
+                                <div class="col s6">
+                                    <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307756.svg" alt="https://www.flaticon.com/free-icon/smiling-face_2307756?term=emoticon%20face%20smile&page=1&position=5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l6 xl4">
+                            <div class="card-panel red darken-2">
+                                <div class="col s6 white-text">
+                                    <p class="card-head">Sedho</p>
+                                    <h3 class="card-content">{{global.meninggal.toLocaleString('id')}}</h3>
+                                    <p class="card-detail">menungsho</p>
+                                </div>
+                                <div class="col s6">
+                                    <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307745.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="data-global" style="padding-top: 20px;">
+                    <div class="row" style="padding-bottom: 0;">
+                      <div>
+                          <h4>Sak Indonesia</h5>
+                      </div>
+                      <div style="width: 270px;
+                      margin-top: -53px;
+                      padding-left: 220px;" >
+                          <img class="responsive-img" src="https://image.flaticon.com/icons/svg/323/323372.svg" alt="https://www.flaticon.com/free-icon/indonesia_323372?term=nation%20flag%20indonesia&page=1&position=1">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel yellow">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Positif</p>
+                                  <h2 class="card-content">{{indonesia.positif.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307709.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel green accent-3">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Mari</p>
+                                  <h2 class="card-content">{{indonesia.sembuh.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307756.svg" alt="https://www.flaticon.com/free-icon/smiling-face_2307756?term=emoticon%20face%20smile&page=1&position=5">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel red darken-2">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Sedho</p>
+                                  <h2 class="card-content">{{indonesia.meninggal.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307745.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div id="provinsi">
+                <div class="data-global" style="padding-top: 20px;">
+                    <div class="row" style="padding-bottom: 0;">
+                      <div>
+                          <h4>Per Propinsi</h5>
+                      </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 0;">
+                        <div class="col s12">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">map</i>
+                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <label for="autocomplete-input">Nama Propinsi</label>
+                              </div>
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel yellow">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Positif</p>
+                                  <h2 class="card-content">{{global.positif.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307709.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel green accent-3">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Mari</p>
+                                  <h2 class="card-content">{{global.sembuh.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307756.svg" alt="https://www.flaticon.com/free-icon/smiling-face_2307756?term=emoticon%20face%20smile&page=1&position=5">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col s12 m12 l6 xl4">
+                          <div class="card-panel red darken-2">
+                              <div class="col s6 white-text">
+                                  <p class="card-head">Sedho</p>
+                                  <h2 class="card-content">{{global.meninggal.toLocaleString('id')}}</h2>
+                                  <p class="card-detail">menungsho</p>
+                              </div>
+                              <div class="col s6">
+                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307745.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div id="global">
+  
+              </div>
+          </div>
+          <div id="footer">
+            <footer class="page-footer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col l6 s12">
+                      <h5 class="white-text">Footer Content</h5>
+                      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Links</h5>
+                      <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                  © 2014 Copyright Text
+                  <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                  </div>
+                </div>
+              </footer>
+          </div>
+      </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        const coronaVm = new Vue({
+            el: '#app',
+            data: { 
+                display: 'redbox' ,
+                global: {
+                    positif: 0,
+                    sembuh: 0,
+                    meninggal: 0,
+                },
+                indonesia: {
+                    positif: 0,
+                    sembuh: 0,
+                    meninggal: 0
+                },
+                propinsi: null,
+                dataGlobal: null
+            },
+            created () {
+                // golek propinsi
+                this.onload()
+            },
+            methods: {
+                onload () {
+                    this.getIndonesia()
+                    this.getPropinsi()
+                    this.getGlobal()
+                    this.getGlobalPositif()
+                    this.getGlobalSembuh()
+                    this.getGlobalMeninggal()
+                },
+                getIndonesia () {
+                    axios.get('https://api.kawalcorona.com/indonesia/')
+                        .then((res) => {
+                            // console.log('Indonesia axios', res)
+                            this.indonesia = res.data[0]
+                            console.log(this.indonesia)
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
+                getPropinsi () {
+                    axios.get('https://api.kawalcorona.com/indonesia/provinsi/')
+                        .then((res) => {
+                            console.log('Propinsi', res)
+                            this.propinsi = res.data
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
+                getGlobal () {
+                    axios.get('https://api.kawalcorona.com/')
+                        .then((res) => {
+                            console.log('Global', res)
+                            this.dataGlobal = res.data
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
+                getGlobalPositif () {
+                    axios.get('https://api.kawalcorona.com/positif/')
+                        .then((res) => {
+                            console.log('Global Positif', res)
+                            this.global.positif = res.data.value
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
+                getGlobalSembuh () {
+                    axios.get('https://api.kawalcorona.com/sembuh/')
+                        .then((res) => {
+                            console.log('Global Sembuh', res)
+                            this.global.sembuh = res.data.value
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
+                getGlobalMeninggal () {
+                    axios.get('https://api.kawalcorona.com/meninggal/')
+                        .then((res) => {
+                            console.log('Global Meninggal', res)
+                            this.global.meninggal = res.data.value
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                }
+            }
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.autocomplete');
+            var instances = M.Autocomplete.init(elems, {
+                data: coronaVm.$data.nama_propinsi
+            });
+        });
+    </script>
+  </body>
+</html>
+      
