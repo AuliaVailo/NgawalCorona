@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
     <title>Ngawal Korona</title>
     <style>
         
@@ -176,6 +179,7 @@
                         </div>
                       </div>
                   </div>
+                  <div id="mapid" style="height: 450px;"></div>
                   <div id="global-detail">
                     <div class="card">
                       <div class="tableFixHead">
@@ -478,7 +482,14 @@
                   Kasus_Posi: 0,
                   Kasus_Semb: 0,
                   Kasus_Meni: 0
-                }
+                },
+                map: null,
+                tileLayer: null,
+                layers: [],
+            },
+            mounted() {
+              this.initMap();
+              this.initLayers();
             },
             created () {
                 this.onload()
@@ -490,6 +501,61 @@
                 }, 2000);
             },
             methods: {
+                initMap(){
+                  let lat = '-2.548926'
+                  let lng = '118.0148634'
+                  this.map = L.map('mapid').setView([lat, lng], 4);
+                  const that = this
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position){
+                      lat = position.coords.latitude
+                      lng = position.coords.longitude
+                      var myIcon = L.icon({
+                        iconUrl: 'https://image.flaticon.com/icons/svg/2617/2617861.svg',
+                        iconSize: [38, 95],
+                        iconAnchor: [22, 94],
+                        popupAnchor: [-3, -76]
+                    });
+                      var marker = L.marker([lat, lng],{icon: myIcon}).addTo(that.map);
+                      marker.bindPopup("<b>Hallo Cah!</b><br>Awakmu nang kene").openPopup()
+                      marker.on('mouseover', function (e) {
+                        this.openPopup();
+                      });
+                      marker.on('mouseout', function (e) {
+                          this.closePopup();
+                      });
+                      // that.map.flyTo([lat, lng], 12)
+                    });
+                  } else {
+                    alert("Geolocation is not supported by this browser.");
+                  }        
+                },
+                initLayers(){
+                  this.tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                      maxZoom: 18,
+                      id: 'mapbox/streets-v11',
+                      tileSize: 512,
+                      zoomOffset: -1,
+                      accessToken: 'pk.eyJ1IjoidmFpbG80MTM1IiwiYSI6ImNrODc2MXlsaDBsa2Uzbm1ybWM0eDNrNm8ifQ.iK8rImtxxad-agBgbpYtyA'
+                  })
+                  this.tileLayer.addTo(this.map );
+                },
+                addToMap(){
+                  const that = this
+                  this.dataGlobal.forEach(function(el){
+                    var marker = L.marker([el.attributes.Lat, el.attributes.Long_]).addTo(that.map);
+                    marker.bindPopup("<b>"+el.attributes.Country_Region+"</b><br>Ketemu : <b>"+el.attributes.Confirmed+"</b><br>Sedho : <b>"+el.attributes.Deaths+"</b><br>Mari : <b>"+el.attributes.Recovered+"</b><br>Positif : <b>"+el.attributes.Active+"</b><br>")
+                    marker.bindTooltip("<b>"+el.attributes.Country_Region+"</b>").openTooltip();
+                    marker.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                    marker.on('mouseout', function (e) {
+                        this.closePopup();
+                        this.openTooltip();
+                    });
+                  })
+                },
                 toDate(dateUnix) {
                   return new Date(dateUnix * 1000)
                 },
@@ -534,6 +600,7 @@
                         .then((res) => {
                             console.log('Global', res)
                             this.dataGlobal = res.data
+                            this.addToMap()
                         })
                         .catch((err) => {
                             console.log(err)
@@ -592,6 +659,21 @@
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems, {});
         });
+
+        // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
+        // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        //     maxZoom: 18,
+        //     id: 'mapbox/streets-v11',
+        //     tileSize: 512,
+        //     zoomOffset: -1,
+        //     accessToken: 'pk.eyJ1IjoidmFpbG80MTM1IiwiYSI6ImNrODc2MXlsaDBsa2Uzbm1ybWM0eDNrNm8ifQ.iK8rImtxxad-agBgbpYtyA'
+        // }).addTo(mymap);
+
+        // //add marker to map
+        // coronaVm.$data.dataGlobal.forEach(function(el){
+        //   console.log(el)
+        // })
     </script>
   </body>
 </html>
