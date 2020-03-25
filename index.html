@@ -30,6 +30,14 @@
         .card-content {
             margin: 0;
         }
+
+        .tableFixHead          { overflow-y: auto; height: 400px; }
+        .tableFixHead thead th { position: sticky; top: 0; }
+
+        /* Just common table stuff. Really. */
+        table  { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px 16px; }
+        th     { background:#eee; height: 60px;}
         /* For mobile */
         @media only screen and (max-width: 768px) {
             .card-panel {
@@ -165,6 +173,38 @@
                         </div>
                       </div>
                   </div>
+                  <div id="global-detail">
+                    <div class="card">
+                      <div class="tableFixHead">
+                        <table id="example" class="display" style="width:100%">
+                          <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Negoro</th>
+                                <!-- <th>Update Terakhir</th> -->
+                                <th>Terkonfirmasi</th>
+                                <th>Sedho</th>
+                                <th>Mari</th>
+                                <th>Positif</th>
+                            </tr>
+                          </thead>
+                  
+                          <tbody>
+                            <tr v-for="(globe,i) in dataGlobal" :key="i">
+                              <td>{{i+1}}</td>
+                              <td>{{globe.attributes.Country_Region}}</td>
+                              <!-- <td>{{toDate(globe.attributes.Last_Update)}}</td> -->
+                              <td align="right">{{globe.attributes.Confirmed.toLocaleString('id')}}</td>
+                              <td align="right">{{globe.attributes.Deaths.toLocaleString('id')}}</td>
+                              <td align="right">{{globe.attributes.Recovered.toLocaleString('id')}}</td>
+                              <td align="right">{{globe.attributes.Active.toLocaleString('id')}}</td>
+                           </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                    </div>
+                  </div>
                   <div id="indonesia" class="data-global" style="padding-top: 20px;">
                     <div class="row" style="padding-bottom: 0;">
                       <div>
@@ -265,11 +305,12 @@
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">map</i>
-                                <input type="text" id="autocomplete-input" v-model="propinsiku" :value="propinsiku" @change="change(propinsiku)" class="autocomplete">
-                                <label for="autocomplete-input">Nama Propinsi</label>
+                                <input type="text" id="autocomplete-input" v-model="propinsiku" :value="propinsiku" class="autocomplete">
+                                <label for="autocomplete-input">Jeneng Propinsi</label>
                               </div>
                         </div>
-                      </div>
+                    </div>
+                    <h4>{{propinsiku}}</h4>
                     <div class="row">
                       <div class="col s12 m12 l6 xl4">
                         <div class="card-panel yellow">
@@ -343,13 +384,46 @@
                     </div>
                 </div>
               </div>
+              <h4>Datane Sak Propinsi</h4>
+              <div id="propinsi-detail">
+                <div class="card">
+                  <div class="tableFixHead">
+                    <table id="example" class="display" style="width:100%">
+                      <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Negoro</th>
+                            <!-- <th>Update Terakhir</th> -->
+                            <!-- <th>Terkonfirmasi</th> -->
+                            <th>Sedho</th>
+                            <th>Mari</th>
+                            <th>Positif</th>
+                        </tr>
+                      </thead>
+              
+                      <tbody>
+                        <tr v-for="(prop,i) in propinsi" :key="i">
+                          <td>{{i+1}}</td>
+                          <td>{{prop.attributes.Provinsi}}</td>
+                          <!-- <td>{{toDate(globe.attributes.Last_Update)}}</td> -->
+                          <!-- <td align="right">{{prop.attributes.Confirmed.toLocaleString('id')}}</td> -->
+                          <td align="right">{{prop.attributes.Kasus_Meni.toLocaleString('id')}}</td>
+                          <td align="right">{{prop.attributes.Kasus_Semb.toLocaleString('id')}}</td>
+                          <td align="right">{{prop.attributes.Kasus_Posi.toLocaleString('id')}}</td>
+                       </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
+              </div>
           </div>
           <div id="footer">
             <footer class="page-footer">
                 <div class="container">
                   <div class="row">
                     <div class="col l6 s12">
-                      <h5 class="white-text">Ngawal Koroan</h5>
+                      <h5 class="white-text">Ngawal Korona</h5>
                       <p class="grey-text text-lighten-4">Ayok update terus info Korona, ben ngerti koyok pye penyebarane.</p>
                       <p class="grey-text text-lighten-4">Ayok, ojo dolan ae. luwih apik nang omah saiki, kanggo mbatasi nyebare Virus Korona. ojo kokehan dolan ae Cah!</p>
                     </div>
@@ -413,6 +487,9 @@
                 }, 2000);
             },
             methods: {
+                toDate(dateUnix) {
+                  return new Date(dateUnix * 1000)
+                },
                 onload () {
                     this.getIndonesia()
                     this.getPropinsi()
@@ -489,10 +566,10 @@
                             console.log(err)
                         })
                 },
-                change(propinsiku) {
-                  console.log(propinsiku)
-                  var propinsiFiltered =  this.propinsi.filter(function(propinsi) {
-                    return propinsi.attributes.Provinsi === propinsiku;
+                change(val) {
+                  this.propinsiku = val
+                  var propinsiFiltered =  this.propinsi.filter(function(el) {
+                    return el.attributes.Provinsi === val;
                   });
                   this.dataPropinsiku = propinsiFiltered[0].attributes
                   console.log(this.dataPropinsiku)
@@ -504,7 +581,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.autocomplete');
             var instances = M.Autocomplete.init(elems, {
-                data: coronaVm.$data.nama_propinsi
+                data: coronaVm.$data.nama_propinsi,
+                onAutocomplete: function(txt) {
+                  coronaVm.change(txt)
+                },
             });
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems, {});
