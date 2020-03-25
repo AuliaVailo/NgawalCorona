@@ -424,6 +424,52 @@
                   
                 </div>
               </div>
+              <h4>Datane Per Kasus</h4>
+              <div id="propinsi-detail">
+                <div class="card">
+                  <div class="tableFixHead">
+                    <table id="example" class="display" style="width:100%">
+                      <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Wilayah</th>
+                            <th>Kelamin</th>
+                            <th>Umur</th>
+                            <th>Warga Negara</th>
+                            <th>Status</th>
+                        </tr>
+                      </thead>
+              
+                      <tbody>
+                        <tr v-for="(kasus,i) in perkasus" :key="i">
+                          <td>{{kasus.id}}</td>
+                          <td>{{kasus.klaster}}</td>
+                          <td>
+                            <img v-if="kasus.genderid" width="10%" class="responsive-img" src="https://image.flaticon.com/icons/svg/145/145867.svg" alt="https://www.flaticon.com/free-icon/boy_145867">
+                            <img v-else class="responsive-img" width="10%" src="https://image.flaticon.com/icons/svg/145/145862.svg" alt="https://www.flaticon.com/free-icon/girl_145862">
+                          </td>
+                          <td align="right">{{kasus.umur}}</td>
+                          <td align="right">{{kasus.wn}}</td>
+                          <td align="right">
+                            <span v-if="kasus.statusid === 0" class="new badge red white-text" :data-badge-caption="kasus.status"></span>
+                            <span v-if="kasus.statusid === 1" class="new badge green white-text" :data-badge-caption="kasus.status"></span>
+                            <span v-if="kasus.statusid === 2" class="new badge yellow white-text" :data-badge-caption="kasus.status"></span>
+                          </td>
+                       </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="modal-content" style="padding-bottom: 20px;">
+                <div class="carousel carousel-slider">
+                  <a class="carousel-item" href="https://asset.kompas.com/data/photo/2020/03/16/5e6ef0057c9c1.jpg" target="_blank"><img src="https://asset.kompas.com/data/photo/2020/03/16/5e6ef0057c9c1.jpg"></a>
+                  <a class="carousel-item" href="https://www.pantau.com/topic/infografis/infografis-10-langkah-mencuci-tangan-yang-dianjurkan-who" target="_blank"><img src="https://www.pantau.com/uploads/news/content/1583758500-993478804.png"></a>
+                  <a class="carousel-item" href="https://smol.id/wp-content/uploads/2020/01/18112ab4-9fbd-4160-b546-64cc7029eb39.jpeg" target="_blank"><img src="https://smol.id/wp-content/uploads/2020/01/18112ab4-9fbd-4160-b546-64cc7029eb39.jpeg"></a>
+                  <a class="carousel-item" href="https://www.suarasurabaya.net/info-grafis/2020/yuk-cegah-virus-corona/" target="_blank"><img src="https://www.suarasurabaya.net/wp-content/uploads/2020/03/INFOGRAFIS-CORONA-03-840x493.jpg"></a>
+                </div>
+              </div>
           </div>
           <div id="footer">
             <footer class="page-footer">
@@ -486,6 +532,7 @@
                 map: null,
                 tileLayer: null,
                 layers: [],
+                perkasus: {}
             },
             mounted() {
               this.initMap();
@@ -566,6 +613,7 @@
                     this.getGlobalPositif()
                     this.getGlobalSembuh()
                     this.getGlobalMeninggal()
+                    this.getPerKasus()
                 },
                 getIndonesia () {
                     axios.get('https://api.kawalcorona.com/indonesia/')
@@ -636,6 +684,17 @@
                             console.log(err)
                         })
                 },
+                getPerKasus () {
+                  // https://indonesia-covid-19.mathdro.id/api/kasus
+                  axios.get('https://indonesia-covid-19.mathdro.id/api/kasus/')
+                        .then((res) => {
+                            console.log('Indonesia Perkasus', res)
+                            this.perkasus = res.data.data.nodes
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                },
                 change(val) {
                   this.propinsiku = val
                   var propinsiFiltered =  this.propinsi.filter(function(el) {
@@ -649,15 +708,22 @@
 
         
         document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.autocomplete');
-            var instances = M.Autocomplete.init(elems, {
+            var autocompleteelems = document.querySelectorAll('.autocomplete');
+            var autocomplete = M.Autocomplete.init(autocompleteelems, {
                 data: coronaVm.$data.nama_propinsi,
                 onAutocomplete: function(txt) {
                   coronaVm.change(txt)
                 },
             });
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems, {});
+            var sidenavelems = document.querySelectorAll('.sidenav');
+            var sidenav = M.Sidenav.init(sidenavelems, {});
+
+            var carouselelems = document.querySelector('.carousel');
+            var carousel = M.Carousel.init(carouselelems, {
+              duration: 200,
+              fullWidth: true,
+              padding: 10
+            });
         });
 
         // var mymap = L.map('mapid').setView([51.505, -0.09], 13)
