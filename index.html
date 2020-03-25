@@ -33,7 +33,23 @@
         /* For mobile */
         @media only screen and (max-width: 768px) {
             .card-panel {
+                height: 150px;
+            }
+        }
+
+        @media only screen and (max-width: 993px) {
+            .card-panel {
                 height: 250px;
+            }
+
+            .responsive-img {
+              width: 60%;
+            }
+        }
+
+        @media only screen and (max-width: 640px) {
+            .card-panel {
+                height: 150px;
             }
         }
     </style>
@@ -165,7 +181,7 @@
                           <div class="card-panel yellow">
                               <div class="col s6 white-text">
                                   <p class="card-head">Positif</p>
-                                  <h2 v-if="indonesia.positif" class="card-content">{{indonesia.positif.toLocaleString('id')}}</h2>
+                                  <h4 v-if="indonesia.positif" class="card-content">{{indonesia.positif.toLocaleString('id')}}</h4>
                                   <div v-else class="preloader-wrapper big active">
                                     <div class="spinner-layer spinner-blue-only">
                                       <div class="circle-clipper left">
@@ -188,7 +204,7 @@
                           <div class="card-panel green accent-3">
                               <div class="col s6 white-text">
                                   <p class="card-head">Mari</p>
-                                  <h2 v-if="indonesia.sembuh" class="card-content">{{indonesia.sembuh.toLocaleString('id')}}</h2>
+                                  <h4 v-if="indonesia.sembuh" class="card-content">{{indonesia.sembuh.toLocaleString('id')}}</h4>
                                   <div v-else class="preloader-wrapper big active">
                                     <div class="spinner-layer spinner-blue-only">
                                       <div class="circle-clipper left">
@@ -211,7 +227,7 @@
                           <div class="card-panel red darken-2">
                               <div class="col s6 white-text">
                                   <p class="card-head">Sedho</p>
-                                  <h2 v-if="indonesia.meninggal" class="card-content">{{indonesia.meninggal.toLocaleString('id')}}</h2>
+                                  <h4 v-if="indonesia.meninggal" class="card-content">{{indonesia.meninggal.toLocaleString('id')}}</h4>
                                   <div v-else class="preloader-wrapper big active">
                                     <div class="spinner-layer spinner-blue-only">
                                       <div class="circle-clipper left">
