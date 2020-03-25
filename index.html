@@ -249,64 +249,99 @@
                     </div>
                 </div>
               </div>
-              <!-- <div id="provinsi">
+              <div id="provinsi">
                 <div class="data-global" style="padding-top: 20px;">
                     <div class="row" style="padding-bottom: 0;">
                       <div>
                           <h4>Per Propinsi</h5>
+                      </div>
+                      <div style="width: 280px;
+                      margin-top: -60px;
+                      padding-left: 220px;" >
+                          <img class="responsive-img z-depth-5 circle " src="https://image.flaticon.com/icons/svg/1782/1782793.svg" alt="https://www.flaticon.com/free-icon/pin_1782793?term=maps&page=1&position=23">
                       </div>
                     </div>
                     <div class="row" style="padding-bottom: 0;">
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">map</i>
-                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <input type="text" id="autocomplete-input" v-model="propinsiku" :value="propinsiku" @change="change(propinsiku)" class="autocomplete">
                                 <label for="autocomplete-input">Nama Propinsi</label>
                               </div>
                         </div>
                       </div>
                     <div class="row">
                       <div class="col s12 m12 l6 xl4">
-                          <div class="card-panel yellow">
-                              <div class="col s6 white-text">
-                                  <p class="card-head">Positif</p>
-                                  <h2 class="card-content">{{global.positif.toLocaleString('id')}}</h2>
-                                  <p class="card-detail">menungsho</p>
-                              </div>
-                              <div class="col s6">
-                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307709.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col s12 m12 l6 xl4">
-                          <div class="card-panel green accent-3">
-                              <div class="col s6 white-text">
-                                  <p class="card-head">Mari</p>
-                                  <h2 class="card-content">{{global.sembuh.toLocaleString('id')}}</h2>
-                                  <p class="card-detail">menungsho</p>
-                              </div>
-                              <div class="col s6">
-                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307756.svg" alt="https://www.flaticon.com/free-icon/smiling-face_2307756?term=emoticon%20face%20smile&page=1&position=5">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col s12 m12 l6 xl4">
-                          <div class="card-panel red darken-2">
-                              <div class="col s6 white-text">
-                                  <p class="card-head">Sedho</p>
-                                  <h2 class="card-content">{{global.meninggal.toLocaleString('id')}}</h2>
-                                  <p class="card-detail">menungsho</p>
-                              </div>
-                              <div class="col s6">
-                                  <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307745.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
-                              </div>
-                          </div>
-                      </div>
+                        <div class="card-panel yellow">
+                            <div class="col s6 white-text">
+                                <p class="card-head">Positif</p>
+                                <h4 v-if="indonesia.positif" class="card-content">{{dataPropinsiku.Kasus_Posi.toLocaleString('id')}}</h4>
+                                <div v-else class="preloader-wrapper big active">
+                                  <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <p class="card-detail">menungsho</p>
+                            </div>
+                            <div class="col s6">
+                                <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307709.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l6 xl4">
+                        <div class="card-panel green accent-3">
+                            <div class="col s6 white-text">
+                                <p class="card-head">Mari</p>
+                                <h4 v-if="indonesia.sembuh" class="card-content">{{dataPropinsiku.Kasus_Semb.toLocaleString('id')}}</h4>
+                                <div v-else class="preloader-wrapper big active">
+                                  <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <p class="card-detail">menungsho</p>
+                            </div>
+                            <div class="col s6">
+                                <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307756.svg" alt="https://www.flaticon.com/free-icon/smiling-face_2307756?term=emoticon%20face%20smile&page=1&position=5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l6 xl4">
+                        <div class="card-panel red darken-2">
+                            <div class="col s6 white-text">
+                                <p class="card-head">Sedho</p>
+                                <h4 v-if="indonesia.meninggal" class="card-content">{{dataPropinsiku.Kasus_Meni.toLocaleString('id')}}</h4>
+                                <div v-else class="preloader-wrapper big active">
+                                  <div class="spinner-layer spinner-blue-only">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <p class="card-detail">menungsho</p>
+                            </div>
+                            <div class="col s6">
+                                <img class="responsive-img" src="https://image.flaticon.com/icons/svg/2307/2307745.svg" alt="https://www.flaticon.com/free-icon/crying_2307745?term=emoticon%20face%20cry&page=1&position=2">
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
-              </div> -->
-              <div id="global">
-  
               </div>
           </div>
           <div id="footer">
@@ -359,14 +394,23 @@
                     meninggal: 0
                 },
                 propinsi: null,
-                dataGlobal: null
+                dataGlobal: null,
+                propinsiku: 'Jawa Tengah',
+                nama_propinsi: {},
+                dataPropinsiku: {
+                  Kasus_Posi: 0,
+                  Kasus_Semb: 0,
+                  Kasus_Meni: 0
+                }
             },
             created () {
-                // golek propinsi
                 this.onload()
                 setInterval(() => {
                     this.onload()
                 }, 30 * 60 * 1000);
+                setTimeout(() => {
+                  this.change(this.propinsiku)
+                }, 2000);
             },
             methods: {
                 onload () {
@@ -393,6 +437,13 @@
                         .then((res) => {
                             console.log('Propinsi', res)
                             this.propinsi = res.data
+                            let i = 1
+                            let total = this.propinsi.length
+                            let object = null
+                            this.propinsi.forEach(element => {
+                              this.nama_propinsi[element.attributes.Provinsi] = null
+                            })
+                            console.log(this.nama_propinsi)
                         })
                         .catch((err) => {
                             console.log(err)
@@ -437,6 +488,14 @@
                         .catch((err) => {
                             console.log(err)
                         })
+                },
+                change(propinsiku) {
+                  console.log(propinsiku)
+                  var propinsiFiltered =  this.propinsi.filter(function(propinsi) {
+                    return propinsi.attributes.Provinsi === propinsiku;
+                  });
+                  this.dataPropinsiku = propinsiFiltered[0].attributes
+                  console.log(this.dataPropinsiku)
                 }
             }
         });
