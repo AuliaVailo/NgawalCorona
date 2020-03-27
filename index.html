@@ -192,7 +192,7 @@
                                 <th>Terkonfirmasi</th>
                                 <th>Sedho</th>
                                 <th>Mari</th>
-                                <th>Positif</th>
+                                <th>Aktive</th>
                             </tr>
                           </thead>
                   
@@ -592,7 +592,7 @@
                   const that = this
                   this.dataGlobal.forEach(function(el){
                     var marker = L.marker([el.attributes.Lat, el.attributes.Long_]).addTo(that.map);
-                    marker.bindPopup("<b>"+el.attributes.Country_Region+"</b><br>Ketemu : <b>"+el.attributes.Confirmed+"</b><br>Sedho : <b>"+el.attributes.Deaths+"</b><br>Mari : <b>"+el.attributes.Recovered+"</b><br>Positif : <b>"+el.attributes.Active+"</b><br>")
+                    marker.bindPopup("<b>"+el.attributes.Country_Region+"</b><br>Ketemu : <b>"+el.attributes.Confirmed+"</b><br>Sedho : <b>"+el.attributes.Deaths+"</b><br>Mari : <b>"+el.attributes.Recovered+"</b><br>Aktive : <b>"+el.attributes.Active+"</b><br>")
                     marker.bindTooltip("<b>"+el.attributes.Country_Region+"</b>").openTooltip();
                     marker.on('mouseover', function (e) {
                         this.openPopup();
